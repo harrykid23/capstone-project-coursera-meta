@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const BookingForm = ({ availableTimes }) => {
+const BookingForm = ({ availableTimes, dispatchAvailableTimes }) => {
   const [formBooking, setFormBooking] = useState({
     date: "",
     time: "",
@@ -14,7 +14,9 @@ const BookingForm = ({ availableTimes }) => {
 
   useEffect(() => {
     setFormBooking((prevState) => ({ ...prevState, time: "" }));
-    // dispatchAvailableTimes({ date: formBooking.date });
+    if (formBooking.date) {
+      dispatchAvailableTimes({ date: new Date(formBooking.date) });
+    }
   }, [formBooking.date]);
   return (
     <>
