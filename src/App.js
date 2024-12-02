@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import HomePage from "./pages/HomePage";
 import BookingPage from "./pages/BookingPage";
+import ConfirmedBookingPage from "./pages/ConfirmedBookingPage";
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
               <Route
                 path="/reservations"
                 element={<BookingPage {...props} />}
+              />
+              <Route
+                path="/reservations/confirmed"
+                Component={ConfirmedBookingPage}
               />
             </Routes>
           )}

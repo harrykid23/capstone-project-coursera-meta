@@ -98,7 +98,8 @@ a {
   text-decoration: none;
 }
 
-button {
+button,
+.button {
   padding: 0.7rem 2rem;
   background: var(--color-2);
   color: black;
@@ -111,7 +112,8 @@ button {
   outline: none;
   border: none;
 }
-button:hover {
+button:hover,
+.button:hover {
   background: var(--color-2-hover);
   transition: all 0.3s ease;
 }

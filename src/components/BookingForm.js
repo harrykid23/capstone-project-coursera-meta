@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 const BookingForm = ({ availableTimes, dispatchAvailableTimes }) => {
+  const navigate = useNavigate();
   const [formBooking, setFormBooking] = useState({
     date: "",
     time: "",
     guests: "",
     occasion: "",
   });
-  const onSubmitFormBooking = (e) => {
+  const submitForm = (e) => {
     e.preventDefault();
-    console.log({ formBooking });
+    const res = window.submitAPI(formBooking);
+
+    if (res) {
+      navigate("/reservations/confirmed");
+    }
   };
 
   useEffect(() => {
@@ -34,7 +40,7 @@ const BookingForm = ({ availableTimes, dispatchAvailableTimes }) => {
           gap: "1rem",
           alignItems: "center",
         }}
-        onSubmit={onSubmitFormBooking}
+        onSubmit={submitForm}
       >
         <div className="form-item">
           <label htmlFor="res-date">Choose date</label>
