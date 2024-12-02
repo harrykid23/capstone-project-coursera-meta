@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const Nav = () => {
   const menuList = [
     {
@@ -36,9 +38,9 @@ const Nav = () => {
       <ul>
         {menuList.map((item, index) => {
           return (
-            <a key={index} href={item.url}>
+            <Link key={index} to={item.url}>
               {item.title}
-            </a>
+            </Link>
           );
         })}
       </ul>

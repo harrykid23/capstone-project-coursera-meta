@@ -195,6 +195,31 @@ section {
   overflow-x: auto;
 }
 
+.form-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.3rem;
+}
+.form-item input:not([type="button"]),
+.form-item select {
+  outline: 1px solid black;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--container-radius);
+}
+.form-item input:not([type="button"])::placeholder,
+.form-item select::placeholder {
+  color: #aaaaaa;
+}
+select {
+  appearance: none;
+  padding: 10px;
+  background: url("https://www.svgrepo.com/show/80156/down-arrow.svg") no-repeat
+    right 12px center;
+  background-size: 12px;
+}
+
 /* STYLES-FOOTER */
 footer {
   display: grid;
@@ -202,6 +227,7 @@ footer {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   padding: var(--container-padding);
   gap: 4rem;
+  background: var(--color-3);
 }
 @media (max-width: 720px) {
   footer {
