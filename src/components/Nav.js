@@ -27,7 +27,7 @@ const Nav = () => {
   ];
   return (
     <nav>
-      <div style={{ width: "25%", maxWidth: "200px" }}>
+      <div style={{ width: "25%", minWidth: "130px", maxWidth: "200px" }}>
         <img
           style={{ width: "100%", height: "auto", objectFit: "cover" }}
           src={`${process.env.PUBLIC_URL}/icons_assets/Logo.svg`}

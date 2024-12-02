@@ -1,15 +1,19 @@
+import { Route, BrowserRouter as Router, Routes } from "react-router";
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
-import Nav from "./components/Nav";
 
 function App() {
   return (
     <>
-      <Header />
-      <Main />
-      <Footer />
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" Component={Main}></Route>
+        </Routes>
+        <Footer />
+      </Router>
     </>
   );
 }
