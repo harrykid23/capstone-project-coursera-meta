@@ -11,11 +11,17 @@ function App() {
     <>
       <Router>
         <Header />
+
         <Main>
-          <Routes>
-            <Route path="/" Component={HomePage} />
-            <Route path="/reservations" Component={BookingPage} />
-          </Routes>
+          {(props) => (
+            <Routes>
+              <Route path="/" Component={HomePage} />
+              <Route
+                path="/reservations"
+                element={<BookingPage {...props} />}
+              />
+            </Routes>
+          )}
         </Main>
         <Footer />
       </Router>
