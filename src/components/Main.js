@@ -1,19 +1,21 @@
 import { useReducer } from "react";
 
-const Main = ({ children }) => {
-  const initializeTimes = () => {
-    return ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+export const initializeTimes = () => {
+  return ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+};
+
+export const updateTimes = (state, action = {}) => {
+  return {
+    ...state,
   };
-  function reducer(state, action) {
-    return {
-      ...state,
-    };
-  }
-  const [availableTimes, updateTimes] = useReducer(reducer, {
+};
+
+const Main = ({ children }) => {
+  const [availableTimes, dispatchAvailableTimes] = useReducer(updateTimes, {
     data: initializeTimes(),
   });
 
-  return <main>{children({ availableTimes, updateTimes })}</main>;
+  return <main>{children({ availableTimes, dispatchAvailableTimes })}</main>;
 };
 
 export default Main;

@@ -1,6 +1,6 @@
 import BookingForm from "../components/BookingForm";
 
-const BookingPage = ({ availableTimes, updateTimes }) => {
+const BookingPage = ({ availableTimes, dispatchAvailableTimes }) => {
   return (
     <>
       <section
@@ -11,7 +11,7 @@ const BookingPage = ({ availableTimes, updateTimes }) => {
         }}
       >
         <h2 className="font-markazi">Reservations</h2>
-        <BookingForm {...{ availableTimes, updateTimes }} />
+        <BookingForm {...{ availableTimes, dispatchAvailableTimes }} />
       </section>
     </>
   );
