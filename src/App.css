@@ -210,6 +210,10 @@ section {
   padding: 0.5rem 1rem;
   border-radius: var(--container-radius);
 }
+.form-item.error input:not([type="button"]),
+.form-item.error select {
+  outline: 1px solid red;
+}
 .form-item input:not([type="button"])::placeholder,
 .form-item select::placeholder {
   color: #aaaaaa;

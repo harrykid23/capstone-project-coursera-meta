@@ -1,29 +1,65 @@
-import { useEffect, useState } from "react";
+import { useFormik } from "formik";
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import * as Yup from "yup";
+
+const ErrorMessageComponent = ({ children }) => {
+  if (children) {
+    return <span style={{ color: "red" }}>{children}</span>;
+  } else {
+    return null;
+  }
+};
 
 const BookingForm = ({ availableTimes, dispatchAvailableTimes }) => {
   const navigate = useNavigate();
-  const [formBooking, setFormBooking] = useState({
-    date: "",
-    time: "",
-    guests: "",
-    occasion: "",
-  });
-  const submitForm = (e) => {
-    e.preventDefault();
-    const res = window.submitAPI(formBooking);
+  const submitForm = (values) => {
+    console.log({ values });
+    const res = window.submitAPI(values);
 
     if (res) {
       navigate("/reservations/confirmed");
     }
   };
+  const formik = useFormik({
+    initialValues: {
+      date: undefined,
+      time: undefined,
+      guests: undefined,
+      occasion: undefined,
+    },
+    onSubmit: submitForm,
+    validationSchema: Yup.object({
+      date: Yup.string().required("Required"),
+      time: Yup.string().required("Required"),
+      guests: Yup.number()
+        .required("Required")
+        .min(1, "Minimum guests is 1")
+        .max(10, "Maximum guests is 10"),
+      occasion: Yup.string().required("Required"),
+    }),
+    validateOnBlur: false,
+    validateOnChange: false,
+  });
+
+  const onChangeField = (name) => {
+    return (e) => {
+      formik.setFieldValue(name, e.target.value || undefined);
+    };
+  };
+
+  const onBlurField = (name) => {
+    return (e) => {
+      formik.validateField(name);
+    };
+  };
 
   useEffect(() => {
-    setFormBooking((prevState) => ({ ...prevState, time: "" }));
-    if (formBooking.date) {
-      dispatchAvailableTimes({ date: new Date(formBooking.date) });
+    formik.setFieldValue("time", "");
+    if (formik.values.date) {
+      dispatchAvailableTimes({ date: new Date(formik.values.date) });
     }
-  }, [formBooking.date]);
+  }, [formik.values.date]);
   return (
     <>
       <h3
@@ -40,46 +76,37 @@ const BookingForm = ({ availableTimes, dispatchAvailableTimes }) => {
           gap: "1rem",
           alignItems: "center",
         }}
-        onSubmit={submitForm}
+        onSubmit={formik.handleSubmit}
       >
-        <div className="form-item">
+        <div className={`form-item ${formik.errors.date ? "error" : ""}`}>
           <label htmlFor="res-date">Choose date</label>
           <input
             type="date"
             id="res-date"
-            value={formBooking.date}
-            onChange={(e) => {
-              e.preventDefault();
-              setFormBooking((prevState) => ({
-                ...prevState,
-                date: e.target.value,
-              }));
-            }}
-            required
+            value={formik.values.date}
+            onChange={onChangeField("date")}
+            onBlur={onBlurField("date")}
           />
+          <ErrorMessageComponent>{formik.errors.date}</ErrorMessageComponent>
         </div>
-        <div className="form-item">
+        <div className={`form-item ${formik.errors.time ? "error" : ""}`}>
           <label htmlFor="res-time">Choose time</label>
           <select
             id="res-time"
-            value={formBooking.time}
-            onChange={(e) => {
-              e.preventDefault();
-              setFormBooking((prevState) => ({
-                ...prevState,
-                time: e.target.value,
-              }));
-            }}
-            required
+            value={formik.values.time}
+            onChange={onChangeField("time")}
+            onBlur={onBlurField("time")}
           >
+            <option value={undefined}></option>
             {availableTimes.data?.map((item, index) => (
               <option key={index} value={item}>
                 {item}
               </option>
             ))}
           </select>
+          <ErrorMessageComponent>{formik.errors.time}</ErrorMessageComponent>
         </div>
-        <div className="form-item">
+        <div className={`form-item ${formik.errors.guests ? "error" : ""}`}>
           <label htmlFor="guests">Number of guests</label>
           <input
             type="number"
@@ -87,34 +114,27 @@ const BookingForm = ({ availableTimes, dispatchAvailableTimes }) => {
             min="1"
             max="10"
             id="guests"
-            value={formBooking.guests}
-            onChange={(e) => {
-              e.preventDefault();
-              setFormBooking((prevState) => ({
-                ...prevState,
-                guests: e.target.value,
-              }));
-            }}
-            required
+            value={formik.values.guests}
+            onChange={onChangeField("guests")}
+            onBlur={onBlurField("guests")}
           />
+          <ErrorMessageComponent>{formik.errors.guests}</ErrorMessageComponent>
         </div>
-        <div className="form-item">
+        <div className={`form-item ${formik.errors.occasion ? "error" : ""}`}>
           <label htmlFor="occasion">Occasion</label>
           <select
             id="occasion"
-            value={formBooking.occasion}
-            onChange={(e) => {
-              e.preventDefault();
-              setFormBooking((prevState) => ({
-                ...prevState,
-                occasion: e.target.value,
-              }));
-            }}
-            required
+            value={formik.values.occasion}
+            onChange={onChangeField("occasion")}
+            onBlur={onBlurField("occasion")}
           >
-            <option>Birthday</option>
-            <option>Anniversary</option>
+            <option value={undefined}></option>
+            <option value="Birthday">Birthday</option>
+            <option value="Anniversary">Anniversary</option>
           </select>
+          <ErrorMessageComponent>
+            {formik.errors.occasion}
+          </ErrorMessageComponent>
         </div>
 
         <button type="submit">Make Your Reservation</button>
