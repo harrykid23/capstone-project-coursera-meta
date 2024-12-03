@@ -7,11 +7,13 @@ import HomePage from "./pages/HomePage";
 import BookingPage from "./pages/BookingPage";
 import ConfirmedBookingPage from "./pages/ConfirmedBookingPage";
 import ComingSoon from "./pages/ComingSoon";
+import ScrollToTop from "./utils/ScrollToTop";
 
 function App() {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Header />
 
         <Main>

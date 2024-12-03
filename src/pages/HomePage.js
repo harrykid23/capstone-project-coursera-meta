@@ -99,6 +99,7 @@ const HomePage = () => {
           className="section-hero-col"
           style={{
             position: "relative",
+            zIndex: "10",
           }}
         >
           <img
@@ -113,6 +114,7 @@ const HomePage = () => {
               borderRadius: "var(--container-radius)",
               left: "50%",
               transform: "translateX(-50%)",
+              zIndex: "10",
             }}
             src={`${process.env.PUBLIC_URL}/icons_assets/restauranfood.jpg`}
           />
