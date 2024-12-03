@@ -29,12 +29,15 @@ const Nav = () => {
   ];
   return (
     <nav>
-      <div style={{ width: "25%", minWidth: "130px", maxWidth: "200px" }}>
+      <Link
+        to="/"
+        style={{ width: "25%", minWidth: "130px", maxWidth: "200px" }}
+      >
         <img
           style={{ width: "100%", height: "auto", objectFit: "cover" }}
           src={`${process.env.PUBLIC_URL}/icons_assets/Logo.svg`}
         />
-      </div>
+      </Link>
       <ul>
         {menuList.map((item, index) => {
           return (

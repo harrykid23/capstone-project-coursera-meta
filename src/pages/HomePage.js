@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const HomePage = () => {
   const mealList = [
     {
@@ -89,7 +91,9 @@ const HomePage = () => {
               traditional recipes served with a modern twist.
             </p>
           </div>
-          <button>Reserve a Table</button>
+          <Link className="button" to="/reservations" aria-label="On Click">
+            Reserve a Table
+          </Link>
         </div>
         <div
           className="section-hero-col"
@@ -125,12 +129,12 @@ const HomePage = () => {
           }}
         >
           <h2 className="font-markazi">This weeks specials!</h2>
-          <button>Online Menu</button>
+          <button aria-label="On Click">Online Menu</button>
         </div>
         <div id="meals-container" style={{ paddingBottom: "2rem" }}>
           {mealList.map((item) => {
             return (
-              <div
+              <article
                 key={item.id}
                 style={{
                   display: "flex",
@@ -209,7 +213,7 @@ const HomePage = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>
