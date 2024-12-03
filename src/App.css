@@ -9,6 +9,7 @@
   --color-2: #f4ce14;
   --color-2-hover: #bb9e0f;
   --color-3: #edefee;
+  --color-3-hover: #cdcfce;
   --color-4: #ee9972;
   --container-radius: 15px;
 }
@@ -144,6 +145,12 @@ nav .mobile-menu-container {
 
 nav a {
   font-weight: bold;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  border-radius: var(--container-radius);
+}
+nav a:hover {
+  background: var(--color-3);
 }
 
 @media (max-width: 720px) {
@@ -195,6 +202,14 @@ section {
   width: 100%;
   gap: 4rem;
   overflow-x: auto;
+}
+
+.article-card .article-card-description {
+  background: var(--color-3);
+  transition: all 0.3s ease;
+}
+.article-card:hover .article-card-description {
+  background: var(--color-3-hover);
 }
 
 .form-item {

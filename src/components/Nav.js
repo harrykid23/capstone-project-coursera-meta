@@ -41,7 +41,7 @@ const Nav = () => {
       <ul>
         {menuList.map((item, index) => {
           return (
-            <Link key={index} to={item.url}>
+            <Link className="nav-item" key={index} to={item.url}>
               {item.title}
             </Link>
           );

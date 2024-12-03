@@ -136,6 +136,7 @@ const HomePage = () => {
             return (
               <article
                 key={item.id}
+                className="article-card"
                 style={{
                   display: "flex",
                   padding: "0px",
@@ -166,6 +167,7 @@ const HomePage = () => {
                 </div>
 
                 <div
+                  className="article-card-description"
                   style={{
                     width: "100%",
                     borderBottomLeftRadius: "var(--container-radius)",
@@ -175,7 +177,6 @@ const HomePage = () => {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    background: "var(--color-3)",
                     gap: "2rem",
                     flex: "1",
                   }}
