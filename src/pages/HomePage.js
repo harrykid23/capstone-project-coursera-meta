@@ -129,7 +129,9 @@ const HomePage = () => {
           }}
         >
           <h2 className="font-markazi">This weeks specials!</h2>
-          <button aria-label="On Click">Online Menu</button>
+          <Link to="/menu" className="button" aria-label="On Click">
+            Online Menu
+          </Link>
         </div>
         <div id="meals-container" style={{ paddingBottom: "2rem" }}>
           {mealList.map((item) => {

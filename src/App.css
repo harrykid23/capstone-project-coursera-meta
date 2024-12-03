@@ -150,7 +150,13 @@ nav a {
   border-radius: var(--container-radius);
 }
 nav a:hover {
-  background: var(--color-3);
+  background: var(--color-3-hover);
+}
+footer a {
+  transition: all 0.3s ease;
+}
+footer a:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 720px) {

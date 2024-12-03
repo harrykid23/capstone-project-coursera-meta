@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const Footer = () => {
   const footerColumnList = [
     {
@@ -62,7 +64,17 @@ const Footer = () => {
   ];
   return (
     <footer>
-      <div>logo</div>
+      <div>
+        <img
+          style={{
+            width: "100%",
+            height: "auto",
+            objectFit: "contain",
+            mixBlendMode: "multiply",
+          }}
+          src={`${process.env.PUBLIC_URL}/icons_assets/logo_portrait.png`}
+        />
+      </div>
       {footerColumnList.map((item, index) => {
         return (
           <div
@@ -86,12 +98,9 @@ const Footer = () => {
               {item.urlList.map((item2, index2) => {
                 if (item2.url[0] === "/") {
                   return (
-                    <a
-                      key={index2}
-                      href={`${process.env.PUBLIC_URL}/${item2.url}`}
-                    >
+                    <Link key={index2} to={item2.url}>
                       <span>{item2.title}</span>
-                    </a>
+                    </Link>
                   );
                 } else {
                   return (

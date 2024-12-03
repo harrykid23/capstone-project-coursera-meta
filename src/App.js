@@ -6,6 +6,7 @@ import Main from "./components/Main";
 import HomePage from "./pages/HomePage";
 import BookingPage from "./pages/BookingPage";
 import ConfirmedBookingPage from "./pages/ConfirmedBookingPage";
+import ComingSoon from "./pages/ComingSoon";
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
                 path="/reservations/confirmed"
                 Component={ConfirmedBookingPage}
               />
+              <Route path="/about" Component={ComingSoon} />
+              <Route path="/menu" Component={ComingSoon} />
+              <Route path="/order-online" Component={ComingSoon} />
+              <Route path="/login" Component={ComingSoon} />
             </Routes>
           )}
         </Main>
