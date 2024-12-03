@@ -23,16 +23,17 @@ const BookingForm = ({ availableTimes, dispatchAvailableTimes }) => {
   };
   const formik = useFormik({
     initialValues: {
-      date: undefined,
-      time: undefined,
-      guests: undefined,
-      occasion: undefined,
+      date: "",
+      time: "",
+      guests: "",
+      occasion: "",
     },
     onSubmit: submitForm,
     validationSchema: Yup.object({
       date: Yup.string().required("Required"),
       time: Yup.string().required("Required"),
       guests: Yup.number()
+        .typeError("This value must be a number")
         .required("Required")
         .min(1, "Minimum guests is 1")
         .max(10, "Maximum guests is 10"),
@@ -44,7 +45,7 @@ const BookingForm = ({ availableTimes, dispatchAvailableTimes }) => {
 
   const onChangeField = (name) => {
     return (e) => {
-      formik.setFieldValue(name, e.target.value || undefined);
+      formik.setFieldValue(name, e.target.value);
     };
   };
 
@@ -86,6 +87,7 @@ const BookingForm = ({ availableTimes, dispatchAvailableTimes }) => {
             value={formik.values.date}
             onChange={onChangeField("date")}
             onBlur={onBlurField("date")}
+            required
           />
           <ErrorMessageComponent>{formik.errors.date}</ErrorMessageComponent>
         </div>
@@ -96,6 +98,7 @@ const BookingForm = ({ availableTimes, dispatchAvailableTimes }) => {
             value={formik.values.time}
             onChange={onChangeField("time")}
             onBlur={onBlurField("time")}
+            required
           >
             <option value={undefined}></option>
             {availableTimes.data?.map((item, index) => (
@@ -117,6 +120,7 @@ const BookingForm = ({ availableTimes, dispatchAvailableTimes }) => {
             value={formik.values.guests}
             onChange={onChangeField("guests")}
             onBlur={onBlurField("guests")}
+            required
           />
           <ErrorMessageComponent>{formik.errors.guests}</ErrorMessageComponent>
         </div>
@@ -127,6 +131,7 @@ const BookingForm = ({ availableTimes, dispatchAvailableTimes }) => {
             value={formik.values.occasion}
             onChange={onChangeField("occasion")}
             onBlur={onBlurField("occasion")}
+            required
           >
             <option value={undefined}></option>
             <option value="Birthday">Birthday</option>
